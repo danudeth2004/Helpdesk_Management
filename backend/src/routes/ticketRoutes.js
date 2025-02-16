@@ -12,9 +12,9 @@ router.get('/', async (req, res) => {
     console.log('Received status filter:', status);
     let tickets;
     if (status && status !== 'all') {
-      tickets = await ticketRepository.find({ where: { status } });
+      tickets = await ticketRepository.find({ where: { status }, order: { updated_at: "DESC" } });
     } else {
-      tickets = await ticketRepository.find();
+      tickets = await ticketRepository.find({ order: { updated_at: "DESC" } });
     }
     
     console.log('All Tickets:', JSON.stringify(tickets, null, 2));
