@@ -10,6 +10,8 @@ This repository contains a full-stack application with a **React (Vite)** fronte
 -   Redux Toolkit
     
 -   React Router DOM
+  
+-   React Query (TanStack Query)
     
 -   React Hook Form
     
