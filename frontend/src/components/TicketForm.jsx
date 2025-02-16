@@ -1,13 +1,22 @@
 import { useForm } from 'react-hook-form';
 import { useDispatch } from 'react-redux';
-import { addTicket } from '../store/ticket';
+import { addTicket, fetchTickets } from '../store/ticket';
 
-const TicketForm = ({ onClose }) => {
+const TicketForm = ({ onClose, statusFilter }) => {
   const { register, handleSubmit, reset } = useForm();
   const dispatch = useDispatch();
 
+  const handleCreateTicket = async (ticketData) => {
+    try {
+      await dispatch(addTicket(ticketData));
+      dispatch(fetchTickets(statusFilter));
+    } catch (error) {
+      console.error("Error creating ticket:", error);
+    }
+  };
+
   const onSubmit = (data) => {
-    dispatch(addTicket(data));
+    handleCreateTicket(data);
     reset();
     if (onClose) onClose();
   };
